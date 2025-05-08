@@ -1,0 +1,17 @@
+class Solution:
+    def climbStairs(self, n: int) -> int: # -> parameter n is int
+        # recognize like fibonnaci
+        # base case is we're at the top (position two) or 1 step away from the top (position one)
+        # init
+        pos_one = 1
+        pos_two = 1
+
+        # loop over n-1 times to get to bottom of stairs
+        for i in range(n-1):
+
+             #shift recursively 'back up' positons one and two
+            temp_var = pos_one # store val in temp var since bc iteratively updating posone
+            pos_one = pos_one + pos_two # each subproblem = summation of the 2 next steps 
+            pos_two = temp_var 
+
+        return pos_one
