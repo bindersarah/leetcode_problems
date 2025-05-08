@@ -1,0 +1,25 @@
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        # create adj list, mapping each course to prereq list
+        preMap = { i:[] for i in range(numCourses)} # init empty lsit
+        for course, prereq in prerequisites:
+            preMap[course].append(prereq)
+
+        # visit Set to ensure no loops
+        visitSet = set()
+        def dfs(course):
+            if course in visitSet: # already in there = a loop
+                return False
+            if preMap[course] == []: # if empty list, no pre-reqs
+                return True
+
+            visitSet.add(course) # track we are currently assessing this crs
+            for prereq in preMap[course]:
+                if not dfs(prereq): return False # if dfs retruns false
+            visitSet.remove(course)
+            preMap[course] = [] # otherwise remove pre-req to note possible
+            return True
+            
+        for course in range(numCourses):
+            if not dfs(course): return False # if dps returns False: loop
+        return True # else, return true
