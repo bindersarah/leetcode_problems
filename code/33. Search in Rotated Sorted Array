@@ -1,0 +1,35 @@
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        def find_k(nums):
+            # binary search 1: find k:
+            # init
+            n = len(nums)
+            l, r = 0, n - 1
+        
+            # while loop
+            while l < r:
+                mid = (l + r) // 2
+                # get lucky, mid = k (pivot point)
+                if nums[mid] > nums[r]:
+                    l = mid + 1
+                else:
+                    r = mid
+            return l
+
+        k = find_k(nums)
+        
+        # redo binary search
+        n = len(nums)
+        l, r = 0, n - 1
+        
+        while l <= r:
+            mid = (l + r) // 2
+            real_mid = (mid + k) % n
+        
+            if nums[real_mid] == target:
+                return real_mid # mid is index of target in re-sorted list 
+            elif nums[real_mid] > target: # search left
+                r = mid - 1
+            elif nums[real_mid] < target: # search right
+                l = mid + 1
+        return -1 
