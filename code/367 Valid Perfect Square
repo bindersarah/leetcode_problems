@@ -1,0 +1,17 @@
+def isPerfectSquare(self, num: int) -> bool:
+    # init pointers
+    left, right = 0, num
+
+    # while loop
+    while left <= right:
+        # define mid
+        mid = (left+right) // 2
+        # get lucky, find target (mid-sq = num)
+        if mid * mid == num:
+            return True
+        elif mid * mid < num:
+            left = mid + 1
+        elif mid * mid > num:
+            right = mid - 1
+    # exit while loop, if haven't found target, return False
+    return False
