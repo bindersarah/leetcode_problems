@@ -1,0 +1,21 @@
+class Solution:
+    def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, dst: int, k: int) -> int:
+        # init table with inf
+        prices = [float("inf")] * n
+        prices[src] = 0
+
+        # loop k + 1 where k = num stops
+        for k in range(k+1):
+            temp = prices.copy()
+
+            for s, d, p in flights: # each item holds 3 vars
+                if prices[s] == float("inf"): # mark that not possible
+                    continue
+                if prices[s] + p < temp[d]: # stored +next p at current hop
+                    temp[d] = prices[s] + p # update temp
+            prices = temp # update table
+        
+        if prices[dst] == float("inf"):
+            return -1
+        else:
+            return prices[dst]
