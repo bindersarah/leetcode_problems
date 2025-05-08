@@ -1,0 +1,19 @@
+class Solution:
+    def findEvenNumbers(self, digits: List[int]) -> List[int]:
+        digit_counts = Counter(digits)
+        output = set()  
+
+        for f in digits:
+            if f == 0:
+                continue  # skip leading zero
+            for s in digits:
+                for t in digits:
+                    if t % 2 != 0:
+                        continue  # last digit must be even
+                    
+                    num_digits = [f, s, t]
+                    if Counter(num_digits) <= digit_counts:
+                        num = 100*f + 10*s + t # construct num
+                        output.add(num)
+
+        return sorted(output)
