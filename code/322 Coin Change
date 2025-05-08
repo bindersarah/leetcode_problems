@@ -1,0 +1,23 @@
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        # init array in length of coinds + 1, the +1 is for allowing zeros in first row/col
+        dp = [amount+1] * (amount+1) # amount  + 1 = unattainable value (since we want min)
+        # dp will track the amount of coins needed to reach the target amount, in every case
+
+        # base case: first row/col = 0
+        dp[0] = 0 # requires 0 coinds to make amt = 0
+
+            # loop over each value (sub-problem = values that add up to larger value)
+        for a in range(1, amount+1):
+            # loop over each coin
+            for c in coins: # coins are rows in our table
+                # calculate the number of coins needed to get the value j, given the coin i
+                if c <= a: # valid if the coin value is <= amt (of sub-problem)
+                    dp[a] = min(dp[a], 1 + dp[a - c]) # overwrite value in table
+
+        # if min_num of coins needed to reach target amt is still equal to amount + 1:
+        # then target amt can't be made w given coins, return -1
+        if dp[amount] == (amount+1):
+            return -1
+        else:
+            return dp[amount] # return final value, bottom left-hand corner of our table
