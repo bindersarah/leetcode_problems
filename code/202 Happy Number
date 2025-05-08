@@ -1,0 +1,19 @@
+class Solution:
+    def isHappy(self, n: int) -> bool:
+        # helper function
+        def sum_squares(n): # returns sum of squares of the digits
+            digits = list(str(n)) # separate digits
+            for i in range(len(digits)):
+                digits[i] = int(digits[i])**2 # every item in list is now integer-squared
+            output = sum(digits)
+            return output
+            
+        # set to store intermediate results & to detect cycle
+        prev_seen = set()
+        while n != 1 and n not in prev_seen:
+            prev_seen.add(n) # add to set
+            n = sum_squares(n) # get next number
+        if n == 1:
+            return True
+        else:
+            return False
