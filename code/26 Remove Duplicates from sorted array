@@ -1,0 +1,12 @@
+def removeDuplicates(nums):
+    l, r = 0, 1 # two pointers: track current element & track unique element
+    n = len(nums)
+
+    while r < n:
+        if nums[r] != nums[l]: # if NOT duplicate
+            l += 1 
+            nums[l] = nums[r]
+        r += 1 # increment r pointers to check for another dup
+
+    k = l + 1
+    return k
