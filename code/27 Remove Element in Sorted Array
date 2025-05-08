@@ -1,0 +1,12 @@
+class Solution:
+    def removeElement(self, nums: List[int], val: int) -> int:
+        l, r = 0, len(nums) # two pointers: track current element & track unique element
+
+        while l < r: # r denotes size of array
+            if nums[l] == val:
+                nums[l] = nums[r-1] # encounter val: swap w last element of array
+                r -= 1 # decrement arr bc last element was dealt with already (throwaway)
+            else:
+                l +=1 # search next 
+
+        return r # r is len of arr
