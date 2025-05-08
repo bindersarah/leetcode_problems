@@ -1,0 +1,14 @@
+class Solution:
+    def isPowerOfFour(self, n: int) -> bool:
+        # base: n must be positive 
+        if n <= 0:
+            return False
+        
+        # base case n = 1 (4^0 = 1)
+        if n == 1:
+            return True
+        elif n % 4 != 0: # if not divisible by 4
+            return False
+        else:
+            # recursive case - check if n/2 is a power of 2
+            return self.isPowerOfFour(n // 4)
