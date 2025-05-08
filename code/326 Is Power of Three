@@ -1,0 +1,14 @@
+class Solution:
+    def isPowerOfThree(self, n: int) -> bool:
+        # base: n must be positive 
+        if n <= 0:
+            return False
+        
+        # base case n = 1 (3^0 = 1)
+        if n == 1:
+            return True
+        elif n % 3 != 0: # if not divisible by 3
+            return False
+        else:
+            # recursive case - check if n/3 is a power of 3
+            return self.isPowerOfThree(n // 3)
