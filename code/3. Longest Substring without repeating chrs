@@ -1,0 +1,12 @@
+class Solution:
+def lengthOfLongestSubstring(self, s: str) -> int:
+    result = 0
+    my_list = deque() # initializes sliding window
+    for chr in s:
+        if chr in my_list: # if chr already in the window, shrink window
+            while my_list.popleft() != chr: # removes duplicate chr, leftmost chr
+                pass
+        my_list.append(chr) # expand window adding next chr
+        result = max(result, len(my_list)) # update based on largest window 
+    
+    return result
