@@ -1,0 +1,9 @@
+class Solution:
+    def strStr(self, haystack: str, needle: str) -> int:
+        h, n = len(haystack), len(needle)
+
+        for i in range(h - n + 1): # ensure not out of bounds: guarantees len of needle
+            window = haystack[i:i + n] # i + len(needle)
+            if window == needle:
+                return i
+        return -1
