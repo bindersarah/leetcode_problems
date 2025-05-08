@@ -1,0 +1,21 @@
+
+class Solution:
+    def numTrees(self, n: int) -> int:
+        # initialize cache array
+        store = [1] * (n + 1)
+
+        # base cases 
+        # numTree[0] = 1 # empty tree
+        # numTree[1] = 1 # 1 node
+
+        # iterate over possible # of nodes starting at 2
+        for nodes in range(2, n+1):
+            # init total, will be incremented per root node
+            # counts how many C with numberofTrees on left and on right
+            total = 0 
+            for root in range(1, nodes+1): # consider every node as root
+                left = root - 1 # possible left subtrees = root -1
+                right = nodes - root # possible right subtrees in n - root
+                total += store[left] * store[right]
+                store[nodes] = total
+        return store[n]
