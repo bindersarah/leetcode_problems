@@ -1,0 +1,21 @@
+def findContentChildren(g, s):
+
+    # initialize as 0
+    happy_children = 0
+    i = 0
+    j = 0
+    
+    # sort lists in order for greedy algorithm: 
+    g.sort()
+    s.sort()
+
+    # 2 pointer method, i for kids and j for cookies
+    while i < len(g) and j < len(s):
+        if g[i] <= s[j]:
+            happy_children += 1 # increment count 
+            i += 1 # increment i 
+            j += 1 # incrment j
+        else:
+            j += 1 #try the next cookie if the first is too small
+        
+    return happy_children
