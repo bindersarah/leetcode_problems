@@ -1,0 +1,29 @@
+class Solution:
+    def countLargestGroup(self, n: int) -> int:
+        numbers = range(1,n+1)
+        
+        sum_values = [] 
+        # calculate the sum of digits
+        for i in numbers:
+            digits = [int(d) for d in str(i)]
+            sum_values.append(sum(digits))
+        print(sum_values)
+        
+        groups = {}
+        # create dictionary
+        for s in sum_values:
+            if s not in groups:
+                groups[s] = 1
+            else:
+                groups[s] += 1
+        print(groups)
+
+        # find max number of element
+        max_elem = max(groups.values())
+
+        # finally, count number of keys with value = max_elem
+        count = 0
+        for v in groups.values():
+            if v == max_elem:
+                count+=1
+        return count
