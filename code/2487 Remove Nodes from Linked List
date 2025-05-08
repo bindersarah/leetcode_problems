@@ -1,0 +1,40 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def removeNodes(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        # Reverse the list
+        prev, curr = None, head
+        while curr:
+            nxt = curr.next # save value of curr.next, which becomes curr
+            curr.next = prev
+            prev = curr
+            curr = nxt
+        
+        # Filter list in-place
+        # initialize variables
+        dummy = ListNode() # 0 node
+        max_val = 0
+        tail = dummy # 0
+        curr = prev # last node before 0 tail node
+
+        while curr:
+            if curr.val >= max_val: 
+                max_val = curr.val # update max_val
+                #increment, moving left
+                tail.next = curr  # move tail's next pointer to curr node
+                tail = curr # move tail pointer itself left by 1
+            curr = curr.next # increment down the list (slide left)
+        tail.next = None # end while loop
+
+        # reverse again to put back in order
+        prev, curr = None, dummy.next
+        while curr:
+            nxt = curr.next 
+            curr.next = prev
+            prev = curr
+            curr = nxt
+        
+        return prev # new head
